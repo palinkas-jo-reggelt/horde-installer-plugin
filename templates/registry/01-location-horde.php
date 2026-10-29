@@ -7,12 +7,12 @@
  * - var/config/horde/registry.d/ snippets, i.e. 99-custom.php
  * - var/config/horde/registry-sub.domain.org.php
  */
-$this->applications['horde']['fileroot'] = '<?= $appInVendorDir ?>';
-$this->applications['horde']['templates'] = '<?= $appInVendorDir ?>templates<?= $ds ?>';
-$this->applications['horde']['webroot'] = '<?= $webrootUri ?>horde/';
-$this->applications['horde']['jsfs'] = '<?= $webDir . $ds ?>js<?= $ds ?>horde<?= $ds ?>';
-$this->applications['horde']['jsuri'] = '<?= $webrootUri ?>js/horde';
-$this->applications['horde']['staticfs'] = '<?= $webDir . $ds ?>static<?= $ds ?>';
-$this->applications['horde']['staticuri'] = '<?= $webrootUri ?>static/';
-$this->applications['horde']['themesfs'] = '<?= $webDir . $ds ?>themes<?= $ds ?>horde<?= $ds ?>';
-$this->applications['horde']['themesuri'] = '<?= $webrootUri ?>themes/horde';
+$this->applications['horde']['fileroot'] = <?= var_export($appInVendorDir, true) ?>;
+$this->applications['horde']['templates'] = <?= var_export($appInVendorDir . 'templates' . $ds, true) ?>;
+$this->applications['horde']['webroot'] = <?= var_export($webrootUri . 'horde/', true) ?>;
+$this->applications['horde']['jsfs'] = <?= var_export($webDir . $ds . 'js' . $ds . 'horde' . $ds, true) ?>;
+$this->applications['horde']['jsuri'] = <?= var_export($webrootUri . 'js/horde', true) ?>;
+$this->applications['horde']['staticfs'] = <?= var_export($webDir . $ds . 'static' . $ds, true) ?>;
+$this->applications['horde']['staticuri'] = <?= var_export($webrootUri . 'static/', true) ?>;
+$this->applications['horde']['themesfs'] = <?= var_export($webDir . $ds . 'themes' . $ds . 'horde' . $ds, true) ?>;
+$this->applications['horde']['themesuri'] = <?= var_export($webrootUri . 'themes/horde', true) ?>;
