@@ -73,12 +73,14 @@ class JsTreeLinker
     public function run(): void
     {
         $this->filesystem->ensureDirectoryExists($this->jsDir);
+        fwrite(STDERR, 'JsTreeLinker: ' . count($this->apps) . ' apps, ' . count($this->libs) . " libs\n");
         // app javascript dirs are exposed under js/$app
         foreach ($this->apps as $app) {
             [$vendor, $name] =  explode('/', $app, 2);
             $appPath = $this->vendorDir . '/' . $vendor . '/' . $name;
             $jsSourcePath = $appPath . '/js';
             if (!$this->filesystem->isReadable($jsSourcePath)) {
+                fwrite(STDERR, "JsTreeLinker: not readable: $jsSourcePath\n");
                 continue;
             }
             $targetDir = $this->jsDir . '/' . $name;
