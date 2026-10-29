@@ -125,8 +125,12 @@ class ConfigLinker
                     }
                     unlink($vendorFile->getPathname());
                 }
-            } elseif (in_array($this->mode, ['copy']) && file_exists($vendorFile->getPathname())) {
-                // In copy mode, remove copied files if source no longer exists
+            } elseif (in_array($this->mode, ['copy'])
+                && file_exists($vendorFile->getPathname())
+                && $this->isCustomizationFile($relativeName)
+            ) {
+                // In copy mode, remove copied customization files if source no longer exists.
+                // Files shipped by the package itself (nls.php, backends.php, ...) are never touched.
                 if (!file_exists($expectedSource)) {
                     if ($this->io) {
                         $isVerbose = ($this->io instanceof IOInterface) && $this->io->isVerbose();
@@ -147,6 +151,24 @@ class ConfigLinker
             }
         }
     }
+
+    /**
+     * Whether a file in vendor/<app>/config can be a copy made by this plugin.
+     *
+     * Only customization files are copied from var/config. Stock files shipped
+     * by the package (nls.php, backends.php, prefs.php, ...) must never be removed.
+     */
+    private function isCustomizationFile(string $relativeName): bool
+    {
+        $relativeName = str_replace('\\', '/', $relativeName);
+        $base = basename($relativeName);
+
+        return $base === 'conf.php'
+            || str_ends_with($base, '.local.php')
+            || str_starts_with($base, 'registry-')
+            || str_contains($relativeName, '.d/');
+    }
+
 
     /**
      * Link config files from var/config to vendor
