@@ -7,11 +7,11 @@
  * - var/config/horde/registry.d/ snippets, i.e. 99-custom.php
  * - var/config/horde/registry-sub.domain.org.php
  */
-$this->applications['<?= $appName ?>']['fileroot'] = '<?= $appInVendorDir ?>';
-$this->applications['<?= $appName ?>']['templates'] = '<?= $appInVendorDir ?>templates<?= $ds ?>';
-$this->applications['<?= $appName ?>']['themesfs'] = '<?= $webDir . $ds ?>themes<?= $ds . $appName . $ds ?>';
-$this->applications['<?= $appName ?>']['jsfs'] = '<?= $webDir . $ds ?>js<?= $ds . $appName . $ds ?>';
-$this->applications['<?= $appName ?>']['webroot'] = '<?= $webrootUri . $appName ?>/';
-$this->applications['<?= $appName ?>']['jsuri'] = '<?= $webrootUri ?>js/<?= $appName ?>';
-$this->applications['<?= $appName ?>']['themesuri'] = '<?= $webrootUri ?>themes/<?= $appName ?>';
+$this->applications['<?= $appName ?>']['fileroot'] = <?= var_export($appInVendorDir, true) ?>;
+$this->applications['<?= $appName ?>']['templates'] = <?= var_export($appInVendorDir . 'templates' . $ds, true) ?>;
+$this->applications['<?= $appName ?>']['themesfs'] = <?= var_export($webDir . $ds . 'themes' . $ds . $appName . $ds, true) ?>;
+$this->applications['<?= $appName ?>']['jsfs'] = <?= var_export($webDir . $ds . 'js' . $ds . $appName . $ds, true) ?>;
+$this->applications['<?= $appName ?>']['webroot'] = <?= var_export($webrootUri . $appName . '/', true) ?>;
+$this->applications['<?= $appName ?>']['jsuri'] = <?= var_export($webrootUri . 'js/' . $appName, true) ?>;
+$this->applications['<?= $appName ?>']['themesuri'] = <?= var_export($webrootUri . 'themes/' . $appName, true) ?>;
 // End of <?= $appName ?> registry snippet
