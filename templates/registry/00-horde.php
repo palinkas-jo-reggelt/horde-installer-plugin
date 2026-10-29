@@ -4,6 +4,6 @@
  * Edit this file to match your needs
  * To reset from defaults, run `composer horde:reconfigure --force --mode=<?= $mode ?>`
  */
-$deployment_webroot = '<?= $webrootUri ?>';
-$app_fileroot = '<?= $appFileroot ?>';
-$app_webroot = '<?= $appWebroot ?>';
+$deployment_webroot = <?= var_export($webrootUri, true) ?>;
+$app_fileroot = <?= var_export($appFileroot, true) ?>;
+$app_webroot = <?= var_export($appWebroot, true) ?>;
