@@ -51,11 +51,24 @@ class DirectoryTree
 
     public function withVendorDir(string $dir): self
     {
-        $this->vendorDir = '';
-        if ($dir === '' || $dir[0] !== '/') {
-            $this->vendorDir = getcwd();
+        if ($dir === '') {
+            $this->vendorDir = null;
+            return $this;
         }
+        $this->vendorDir = self::isAbsolutePath($dir)
+            ? rtrim($dir, '/\\')
+            : rtrim((string) getcwd(), '/\\') . '/' . $dir;
         return $this;
+    }
+
+    /**
+     * Absolute on POSIX (leading slash) and on Windows (drive letter or UNC path)
+     */
+    private static function isAbsolutePath(string $path): bool
+    {
+        return $path[0] === '/'
+            || $path[0] === '\\'
+            || preg_match('#^[A-Za-z]:[\\\\/]#', $path) === 1;
     }
 
     public function withBinDir(string $dir): self
